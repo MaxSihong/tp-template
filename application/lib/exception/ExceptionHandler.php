@@ -37,7 +37,8 @@ class ExceptionHandler extends Handle
     {
         if ($e instanceof BaseException) { // 如果是自定义的异常
             $this->code = $e->code;
-            $this->message = $e->getMessage();
+            // 如果自定义错误异常，则返回自定义的错误异常
+            !empty($e->getMessage()) ? $this->message = $e->getMessage() : $this->message = config('error_code.' . $e->code);
             $this->httpStatusCode = $e->httpStatusCode;
         } else {
             if (config('app.app_debug')) {
