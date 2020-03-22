@@ -9,7 +9,7 @@
 namespace app\lib\exception;
 
 
-class BadRequestException extends BaseException
+class ParameterException extends BaseException
 {
     public $code;
 

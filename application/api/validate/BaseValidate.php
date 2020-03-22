@@ -9,7 +9,7 @@
 namespace app\api\validate;
 
 
-use app\lib\exception\BadRequestException;
+use app\lib\exception\ParameterException;
 use think\facade\Request;
 use think\Validate;
 
@@ -20,7 +20,7 @@ class BaseValidate extends Validate
         $result = $this->check(Request::param());
 
         if (!$result) {
-            throw new BadRequestException(10001, $this->error);
+            throw new ParameterException(10001, $this->error);
         }
 
         return true;
