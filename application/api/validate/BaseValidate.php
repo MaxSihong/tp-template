@@ -19,9 +19,8 @@ class BaseValidate extends Validate
     {
         $result = $this->check(Request::param());
 
-        if (!$result) {
+        if (!$result)
             throw new ParameterException(10001, $this->error);
-        }
 
         return true;
     }
@@ -39,9 +38,8 @@ class BaseValidate extends Validate
     // 验证是否为手机号
     protected function isMobile($value, $rule = '', $data = '', $field = '')
     {
-        if (!preg_match('^1(3|4|5|7|8)[0-9]\d{8}$^', $value)) {
+        if (!preg_match('^1(3|4|5|7|8)[0-9]\d{8}$^', $value))
             return $field . '必须是手机号';
-        }
 
         return true;
     }
