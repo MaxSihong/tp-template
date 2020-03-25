@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm
  * User: 陈志洪
- * Date: 2020/3/24
- * Time: 12:11
+ * Date: 2020/3/25
+ * Time: 11:00
  */
 
 namespace app\facade;
@@ -12,13 +12,12 @@ namespace app\facade;
 use think\Facade;
 
 /**
- * JWT
- * @see \app\lib\JwtToken
- * @mixin \app\lib\JwtToken
- * @method \app\lib\JwtToken getToken(int $uid) static 生成JwtToken
- * @method \app\lib\JwtToken checkToken() static 校验JwtToken
+ * 注释解释器
+ * @see \app\lib\DocParser
+ * @mixin \app\lib\DocParser
+ * @method \app\lib\DocParser parse(string $doc) static 解析注释
  */
-class JwtToken extends Facade
+class DocParser extends Facade
 {
     /**
      * 获取当前Facade对应类名（或者已经绑定的容器对象标识）
@@ -27,6 +26,6 @@ class JwtToken extends Facade
      */
     protected static function getFacadeClass()
     {
-        return '\app\lib\JwtToken';
+        return '\app\lib\DocParser';
     }
 }

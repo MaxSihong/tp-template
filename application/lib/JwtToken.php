@@ -6,13 +6,17 @@
  * Time: 11:35
  */
 
-namespace app\lib\JwtToken;
-
+namespace app\lib;
 
 use app\lib\exception\UnAuthorizationException;
 use Firebase\JWT\JWT;
 use think\facade\Request;
 
+/**
+ * JWT
+ * Class JwtToken
+ * @package app\lib
+ */
 class JwtToken
 {
     /**
