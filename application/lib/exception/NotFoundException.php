@@ -11,13 +11,5 @@ namespace app\lib\exception;
 
 class NotFoundException extends BaseException
 {
-    /**
-     * @var int 自定义的错误码
-     */
-    public $code;
-
-    /**
-     * @var int HTTP状态码
-     */
     public $httpStatusCode = 404;
 }

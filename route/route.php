@@ -9,12 +9,18 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-Route::get('think', function () {
-    return 'hello,ThinkPHP5!';
+use think\facade\Route;
+
+Route::group('', function () {
+
+    // api
+    Route::group('api', function () {
+
+    })->middleware('Api');
+
+    // admin
+    Route::group('admin', function () {
+
+    })->middleware('Admin');
+
 });
-
-Route::get('hello/:name', 'index/hello');
-
-return [
-
-];
