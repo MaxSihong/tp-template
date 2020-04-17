@@ -12,15 +12,10 @@
 use think\facade\Route;
 
 Route::group('', function () {
-
-    // api
     Route::group('api', function () {
-
-    })->middleware('Api');
-
-    // admin
-    Route::group('admin', function () {
-
-    })->middleware('Admin');
-
+        Route::group('cms', function () {
+        });
+        Route::group('v1', function () {
+        });
+    })->middleware('Auth');
 });

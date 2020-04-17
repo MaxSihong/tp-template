@@ -40,16 +40,17 @@ class JwtToken
      * iss (issuer)：签发人
      * exp (expiration time)：过期时间
      * iat (Issued At)：签发时间
-     * @param $uid int user_id
+     * @param $data array 需要写入jwt的数据
      * @return string
      */
-    public function getToken($uid)
+    public function getToken($data)
     {
         $data = array(
             'iss' => $this->author,
             'iat' => time(),
             'exp' => time() + 60 * 60 * 2, // 延迟两小时过期
-            'id' => $uid
+            'id' => $data['uid'], // 用户ID
+            'scope' => $data['scope'], // 权限，查看 app\lib\enum\AuthEnum内的常量
         );
 
         return JWT::encode($data, $this->key);

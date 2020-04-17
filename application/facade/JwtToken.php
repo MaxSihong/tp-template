@@ -15,7 +15,7 @@ use think\Facade;
  * JWT
  * @see \app\lib\JwtToken
  * @mixin \app\lib\JwtToken
- * @method \app\lib\JwtToken getToken(int $uid) static 生成JwtToken
+ * @method \app\lib\JwtToken getToken(array $data) static 生成JwtToken
  * @method \app\lib\JwtToken checkToken() static 校验JwtToken
  */
 class JwtToken extends Facade
