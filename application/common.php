@@ -10,3 +10,20 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+/**
+ * @param $code
+ * @param $data
+ * @param string $message
+ * @param int $errorCode
+ * @return \think\response\Json
+ */
+function writeJson($code, $data, $message = 'ok', $errorCode = 0)
+{
+    $data = [
+        'error_code' => $errorCode,
+        'message' => $message,
+        'data' => $data,
+    ];
+    return json($data, $code);
+}

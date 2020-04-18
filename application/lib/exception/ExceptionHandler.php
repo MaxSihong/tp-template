@@ -52,7 +52,7 @@ class ExceptionHandler extends Handle
         }
 
         $result = [
-            'code' => $this->code,
+            'error_code' => $this->code,
             'message' => $this->message,
             'request_url' => Request::url(),
         ];
