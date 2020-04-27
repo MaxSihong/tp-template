@@ -8,7 +8,6 @@
 
 namespace app\lib\auth;
 
-
 use think\Request;
 
 abstract class AuthScopeAbstract

@@ -13,7 +13,7 @@ namespace app\lib;
  * Class DocParser
  * @package app\lib
  */
-class DocParser
+class DocParser extends \ArrayObject
 {
     private $params = array();
 
@@ -29,14 +29,16 @@ class DocParser
         }
 
         // Get the comment
-        if (preg_match('#^/\*\*(.*)\*/#s', $doc, $comment) === false)
+        if (preg_match('#^/\*\*(.*)\*/#s', $doc, $comment) === false) {
             return $this->params;
+        }
 
         $comment = trim($comment [1]);
 
         // Get all the lines and strip the * from the first character
-        if (preg_match_all('#^\s*\*(.*)#m', $comment, $lines) === false)
+        if (preg_match_all('#^\s*\*(.*)#m', $comment, $lines) === false) {
             return $this->params;
+        }
 
         $this->parseLines($lines [1]);
 
@@ -50,8 +52,8 @@ class DocParser
         foreach ($lines as $line) {
             $parsedLine = $this->parseLine($line); // Parse the line
 
-            if ($parsedLine === false && !isset ($this->params ['description'])) {
-                if (isset ($desc)) {
+            if ($parsedLine === false && !isset($this->params ['description'])) {
+                if (isset($desc)) {
                     // Store the first line in the short description
                     $this->params ['description'] = implode(PHP_EOL, $desc);
                 }
@@ -63,8 +65,9 @@ class DocParser
 
         $desc = implode(' ', $desc);
 
-        if (!empty ($desc))
+        if (!empty($desc)) {
             $this->params ['long_description'] = $desc;
+        }
     }
 
     private function parseLine($line)
@@ -72,8 +75,9 @@ class DocParser
         // trim the whitespace from the line
         $line = trim($line);
 
-        if (empty ($line))
+        if (empty($line)) {
             return false; // Empty line
+        }
 
         if (strpos($line, '@') === 0) {
             if (strpos($line, ' ') > 0) {
@@ -85,8 +89,9 @@ class DocParser
                 $value = '';
             }
             // Parse the line and return false if the parameter is valid
-            if ($this->setParam($param, $value))
+            if ($this->setParam($param, $value)) {
                 return false;
+            }
         }
 
         return $line;
@@ -94,15 +99,17 @@ class DocParser
 
     private function setParam($param, $value)
     {
-        if ($param == 'param' || $param == 'header')
+        if ($param == 'param' || $param == 'header') {
             $value = $this->formatParam($value);
+        }
 
-        if ($param == 'class')
+        if ($param == 'class') {
             list ($param, $value) = $this->formatClass($value);
+        }
 
         if ($param == 'return' || $param == 'param' || $param == 'header') {
             $this->params [$param][] = $value;
-        } else if (empty ($this->params [$param])) {
+        } elseif (empty($this->params [$param])) {
             $this->params [$param] = $value;
         } else {
             $this->params [$param] = $this->params [$param] . $value;
@@ -120,8 +127,9 @@ class DocParser
             parse_str($r [1], $value);
             foreach ($value as $key => $val) {
                 $val = explode(',', $val);
-                if (count($val) > 1)
+                if (count($val) > 1) {
                     $value [$key] = $val;
+                }
             }
         } else {
             $param = 'Unknown';

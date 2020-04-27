@@ -8,7 +8,6 @@
 
 namespace app\lib\exception;
 
-
 class ParameterException extends BaseException
 {
     public $httpStatusCode = 400;

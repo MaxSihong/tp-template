@@ -8,7 +8,6 @@
 
 namespace app\lib\auth;
 
-
 use app\lib\enum\AuthEnum;
 
 /**

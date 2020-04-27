@@ -8,10 +8,9 @@
 
 namespace app\lib\auth;
 
-
 class AuthScope
 {
-    public function checkJwtScope($request, $jwtData, $key)
+    public function checkJwtScope($jwtData, $key)
     {
         $authScope = null;
 

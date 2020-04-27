@@ -8,7 +8,6 @@
 
 namespace app\lib\enum;
 
-
 class AuthEnum
 {
     // 普通用户

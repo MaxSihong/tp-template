@@ -11,6 +11,10 @@
 
 use think\facade\Route;
 
+/*
+ * 有个缺点，目录结构必须有在controller/.../内
+ * 如 app/api/controller/v1/... 或 app/api/controller/cms/...
+ */
 Route::group('', function () {
     Route::group('api', function () {
         Route::group('cms', function () {

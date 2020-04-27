@@ -8,7 +8,6 @@
 
 namespace app\lib\exception;
 
-
 class UnAuthorizationException extends BaseException
 {
     public $httpStatusCode = 401;

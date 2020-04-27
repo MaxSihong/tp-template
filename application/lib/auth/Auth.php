@@ -8,7 +8,6 @@
 
 namespace app\lib\auth;
 
-
 use app\facade\DocParser;
 use app\facade\JwtToken;
 use app\lib\exception\ForbiddenException;
@@ -27,13 +26,15 @@ class Auth
         $annotation = $this->getDoc($request); // 获取注释内容
 
         // 没有权限注释，或没有 auth，则直接通过
-        if (empty($annotation) || !array_key_exists('auth', $annotation)) return true;
+        if (empty($annotation) || !array_key_exists('auth', $annotation)) {
+            return true;
+        }
 
         // 验证JWT
         $jwtResult = JwtToken::checkToken();
 
         // 验证JWT内的权限，是否属于该方法的权限
-        $authResult = (new AuthScope())->checkJwtScope($request, $jwtResult, $annotation['auth']);
+        $authResult = (new AuthScope())->checkJwtScope($jwtResult, $annotation['auth']);
         if (!$authResult) {
             throw new ForbiddenException(10004);
         }
@@ -60,14 +61,18 @@ class Auth
         // 控制层下有二级目录，需要解析下。如controller/cms/Admin，获取到的是Cms.Admin
         $controllerPath = explode('.', $request->controller());
         // 反射获取当前请求的控制器类
-        $reflection = new \ReflectionClass('app\api\controller\\' . strtolower($controllerPath[0]) . '\\' . $controllerPath[1]);
+        $reflection = new \ReflectionClass(
+            'app\api\controller\\' .
+            strtolower($controllerPath[0]) .
+            '\\' . $controllerPath[1]
+        );
 
         // 类的注释
         $classDoc = $reflection->getDocComment();
         $methods = $reflection->getMethod($request->action());
         $methodsDoc = $methods->getDocComment(); // 方法的注释
 
-        $annotation = DocParser::parse($methodsDoc); // 格式化
-        return $annotation;
+        // 格式化
+        return DocParser::parse($methodsDoc);
     }
 }

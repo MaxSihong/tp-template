@@ -8,7 +8,6 @@
 
 namespace app\lib\exception;
 
-
 class ForbiddenException extends BaseException
 {
     public $httpStatusCode = 403;

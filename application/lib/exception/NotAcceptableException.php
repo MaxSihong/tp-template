@@ -8,7 +8,6 @@
 
 namespace app\lib\exception;
 
-
 class NotAcceptableException extends BaseException
 {
     public $httpStatusCode = 406;

@@ -8,7 +8,6 @@
 
 namespace app\lib\exception;
 
-
 class NotFoundException extends BaseException
 {
     public $httpStatusCode = 404;
