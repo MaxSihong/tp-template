@@ -18,9 +18,6 @@ class AuthScope
             case 'user':
                 $authScope = new UserAuthScope($jwtData);
                 break;
-            case 'wechat':
-                $authScope = new WeChatAuthScope($jwtData);
-                break;
             case 'cms':
                 $authScope = new CmsAuthScope($jwtData);
                 break;
