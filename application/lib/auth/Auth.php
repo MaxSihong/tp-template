@@ -31,8 +31,7 @@ class Auth
         }
 
         // 验证JWT
-//        $jwtResult = JwtToken::checkToken();
-        $jwtResult = [];
+        $jwtResult = JwtToken::checkToken();
 
         // 验证JWT内的权限，是否属于该方法的权限
         $authResult = (new AuthScope())->checkJwtScope($request, $jwtResult, $annotation['auth']);
