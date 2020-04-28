@@ -31,10 +31,11 @@ class Auth
         }
 
         // 验证JWT
-        $jwtResult = JwtToken::checkToken();
+//        $jwtResult = JwtToken::checkToken();
+        $jwtResult = [];
 
         // 验证JWT内的权限，是否属于该方法的权限
-        $authResult = (new AuthScope())->checkJwtScope($jwtResult, $annotation['auth']);
+        $authResult = (new AuthScope())->checkJwtScope($request, $jwtResult, $annotation['auth']);
         if (!$authResult) {
             throw new ForbiddenException(10004);
         }

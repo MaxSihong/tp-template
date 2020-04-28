@@ -8,15 +8,18 @@
 
 namespace app\lib\auth;
 
+use app\lib\BrowserEnvironment;
+
 class AuthScope
 {
-    public function checkJwtScope($jwtData, $key)
+    public function checkJwtScope($request, $jwtData, $key)
     {
         $authScope = null;
 
         switch ($key) {
             case 'user':
-                $authScope = new UserAuthScope($jwtData);
+                BrowserEnvironment::check($request, 'wechat'); // 判断当前浏览器环境是否在微信
+                $authScope = new UserAuthScope($jwtData); // 校验权限
                 break;
             case 'cms':
                 $authScope = new CmsAuthScope($jwtData);
