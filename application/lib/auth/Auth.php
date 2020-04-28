@@ -8,8 +8,8 @@
 
 namespace app\lib\auth;
 
-use app\facade\DocParser;
 use app\facade\JwtToken;
+use app\lib\DocParser;
 use app\lib\exception\ForbiddenException;
 
 class Auth
@@ -45,34 +45,38 @@ class Auth
     /**
      * 获取注释内容
      * @param $request
-     * @return \app\lib\DocParser
+     * @return array|null
      * @throws \ReflectionException
      */
     private function getDoc($request)
     {
-        // 控制层下有一级目录
-//        $reflection = new \ReflectionClass('app\api\controller\\' . $request->controller());
-//        $classDoc = $reflection->getDocComment(); // 类的注释
-//
-//        $methods = $reflection->getMethod($request->action());
-//        $methodsDoc = $methods->getDocComment(); // 方法的注释
-//        return DocParser::parse($methodsDoc); // 格式化
-
-        // 控制层下有二级目录，需要解析下。如controller/cms/Admin，获取到的是Cms.Admin
+        // 控制层下如若有二级目录，需要解析下。如controller/cms/Admin，获取到的是Cms.Admin
         $controllerPath = explode('.', $request->controller());
-        // 反射获取当前请求的控制器类
-        $reflection = new \ReflectionClass(
-            'app\api\controller\\' .
-            strtolower($controllerPath[0]) .
-            '\\' . $controllerPath[1]
-        );
+
+        // 判断当前是二级还是一级
+        if (!array_key_exists(1, $controllerPath)) {
+            // 控制层下有一级目录
+            $reflection = new \ReflectionClass('app\api\controller\\' . $request->controller());
+        } else {
+            // 控制层下有二级目录
+            $reflection = new \ReflectionClass(
+                'app\api\controller\\' .
+                strtolower($controllerPath[0]) .
+                '\\' . $controllerPath[1]
+            );
+        }
 
         // 类的注释
         $classDoc = $reflection->getDocComment();
         $methods = $reflection->getMethod($request->action());
         $methodsDoc = $methods->getDocComment(); // 方法的注释
 
+        if (empty($methodsDoc)) {
+            return null;
+        }
+
         // 格式化
-        return DocParser::parse($methodsDoc);
+        $doc = new DocParser();
+        return $doc->parse($methodsDoc);
     }
 }
