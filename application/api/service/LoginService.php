@@ -38,11 +38,11 @@ class LoginService
             'login_ip' => Request::ip(),
             'login_time' => time()
         ];
-        AdminModel::updateDataByID($user_info['id'], $update_data);
+        AdminModel::updateDataByID($user_info['admin_id'], $update_data);
 
         // 获取jwt令牌
         $data = [
-            'uid' => $user_info['id'],
+            'uid' => $user_info['admin_id'],
             'scope' => AuthEnum::CMS_ADMIN_SCOPE,
         ];
         return JwtToken::getToken($data);
@@ -59,7 +59,7 @@ class LoginService
      */
     private function checkAdmin($data)
     {
-        $result = AdminModel::field('id,account,password,status')
+        $result = AdminModel::field('admin_id,account,password,status')
             ->where('account', '=', $data['account'])
             ->find();
         if (!$result) {
