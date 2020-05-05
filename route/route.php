@@ -18,6 +18,14 @@ Route::group('', function () {
             Route::post('login', 'api/cms.Admin/login');
             // 新增管理员
             Route::post('register', 'api/cms.Admin/register');
+
+            // 菜单管理
+            Route::group('power', function () {
+                // 菜单列表
+                Route::get('', 'api/cms.Power/index');
+                // 新增菜单
+                Route::post('', 'api/cms.Power/create');
+            });
         });
         Route::group('v1', function () {
             // 上传

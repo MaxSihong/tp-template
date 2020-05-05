@@ -16,6 +16,6 @@ class AdminValidate extends BaseValidate
         'account|账号' => 'require|unique:admin,account|length:3,30',
         'password|密码' => 'require|length:6:30',
         'avatar|头像' => 'require',
-        'status|使用状态' => 'require|number|in:0,1',
+        'status|使用状态' => 'require|number|in:0,1', // 0=禁止使用,1=正常使用
     ];
 }
