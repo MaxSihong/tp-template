@@ -4,7 +4,7 @@
  * Created by PhpStorm
  * User: 陈志洪
  * Date: 2020/5/5
- * Time: 3:28 下午
+ * Time: 5:04 下午
  */
 
 namespace app\api\model;
@@ -12,12 +12,12 @@ namespace app\api\model;
 use think\model\Pivot;
 
 /**
- * 角色组和权限中间表
- * Class RolePower
+ * 用户和角色组中间表
+ * Class UserRole
  * @package app\api\model
  */
-class RolePower extends Pivot
+class UserRole extends Pivot
 {
     // 设置主键名
-    protected $pk = 'role_power_id';
+    protected $pk = 'user_role_id';
 }
