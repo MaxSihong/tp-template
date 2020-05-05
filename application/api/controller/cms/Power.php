@@ -18,6 +18,7 @@ class Power
 {
     /**
      * 菜单列表
+     * @auth cms
      * @return \think\response\Json
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -37,6 +38,7 @@ class Power
 
     /**
      * 新增菜单
+     * @auth cms
      * @return \think\response\Json
      * @throws \app\lib\exception\ParameterException
      */

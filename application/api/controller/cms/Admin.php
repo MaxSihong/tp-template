@@ -19,6 +19,7 @@ class Admin
 {
     /**
      * 后台登录
+     * @auth cms
      * @return \think\response\Json
      * @throws ParameterException
      * @throws \think\db\exception\DataNotFoundException
@@ -37,6 +38,7 @@ class Admin
 
     /**
      * 新增管理员
+     * @auth cms
      * @return \think\response\Json
      * @throws ParameterException
      */

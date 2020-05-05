@@ -20,6 +20,7 @@ class Role
 {
     /**
      * 新增角色组
+     * @auth cms
      * @return \think\response\Json
      * @throws ParameterException
      */
