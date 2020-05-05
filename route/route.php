@@ -26,6 +26,12 @@ Route::group('', function () {
                 // 新增菜单
                 Route::post('', 'api/cms.Power/create');
             });
+
+            // 角色管理
+            Route::group('role', function () {
+                // 新增角色
+                Route::post('', 'api/cms.Role/create');
+            });
         });
         Route::group('v1', function () {
             // 上传
