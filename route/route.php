@@ -14,8 +14,14 @@ use think\facade\Route;
 Route::group('', function () {
     Route::group('api', function () {
         Route::group('cms', function () {
+            // 后台登录
+            Route::post('login', 'api/cms.Admin/login');
+            // 新增管理员
+            Route::post('register', 'api/cms.Admin/register');
         });
         Route::group('v1', function () {
+            // 上传
+            Route::post('upload', 'api/v1.Upload/upload');
         });
     })->middleware('Auth');
 });
